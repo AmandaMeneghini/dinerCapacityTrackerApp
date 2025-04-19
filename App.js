@@ -12,6 +12,9 @@ export default function App() {
   const [count, setCount] = useState(0);
   const capacity = 10;
 
+  const isRemoveDisabled = count <= 0;
+  const isAddDisabled = count == capacity;
+
   function addPerson(){
     if(count < capacity){
       return setCount(count + 1);
@@ -19,7 +22,7 @@ export default function App() {
   }
 
   function removePerson(){
-    if(count > 1){
+    if(count > 0){
       return setCount(count - 1);
     }
   }
@@ -35,11 +38,19 @@ export default function App() {
       }
 
       <View style={styles.buttonArea}>
-        <TouchableOpacity style={styles.button} onPress={addPerson}>
+        <TouchableOpacity 
+          style={[styles.button, isAddDisabled && styles.buttonDisable]} 
+          onPress={addPerson}
+          disabled={isAddDisabled}
+          >
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.button, {backgroundColor: '#DDD'}] } onPress={removePerson}>
+        <TouchableOpacity 
+          style={[styles.button, isRemoveDisabled && styles.buttonDisable]} 
+          onPress={removePerson}
+          disabled={isRemoveDisabled}
+          >
           <Text style={styles.buttonText}>Remover</Text>
         </TouchableOpacity>
       </View>
@@ -85,5 +96,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDB240',
     padding: 5,
     borderRadius: 5,
+  },
+  buttonDisable: {
+    backgroundColor: '#DDD',
   }
 });
