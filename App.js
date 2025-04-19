@@ -10,7 +10,7 @@ import {
 export default function App() {
 
   const [count, setCount] = useState(0);
-  const [capacity, setCapacity] = useState(10);
+  const capacity = 10;
 
   function addPerson(){
     if(count < capacity){
