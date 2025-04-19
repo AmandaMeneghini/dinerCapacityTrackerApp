@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,16 +8,24 @@ import {
 } from 'react-native';
 
 export default function App() {
+
+  const [count, setCount] = useState(0);
+  const [capacity, setCapacity] = useState(10);
+
+  function addPerson(){
+    return setCount(count + 1);
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Pessoas no restaurante:</Text>
 
-      <Text style={styles.countDisplay}>0</Text>
+      <Text style={styles.countDisplay}>{count}</Text>
 
       <Text style={styles.warning}>Restaurante está no seu limite de pessoas</Text>
 
       <View style={styles.buttonArea}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={addPerson}>
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
 
