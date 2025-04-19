@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,20 +8,49 @@ import {
 } from 'react-native';
 
 export default function App() {
+
+  const [count, setCount] = useState(0);
+  const capacity = 10;
+
+  const isRemoveDisabled = count <= 0;
+  const isAddDisabled = count == capacity;
+
+  function addPerson(){
+    if(count < capacity){
+      return setCount(count + 1);
+    }
+  }
+
+  function removePerson(){
+    if(count > 0){
+      return setCount(count - 1);
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Pessoas no restaurante:</Text>
 
-      <Text style={styles.countDisplay}>0</Text>
+      <Text style={styles.countDisplay}>{count}</Text>
 
-      <Text style={styles.warning}>Restaurante está no seu limite de pessoas</Text>
+      {count == capacity && 
+        <Text style={styles.warning}>Restaurante está no seu limite de pessoas</Text>
+      }
 
       <View style={styles.buttonArea}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          style={[styles.button, isAddDisabled && styles.buttonDisable]} 
+          onPress={addPerson}
+          disabled={isAddDisabled}
+          >
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.button, {backgroundColor: '#DDD'}]}>
+        <TouchableOpacity 
+          style={[styles.button, isRemoveDisabled && styles.buttonDisable]} 
+          onPress={removePerson}
+          disabled={isRemoveDisabled}
+          >
           <Text style={styles.buttonText}>Remover</Text>
         </TouchableOpacity>
       </View>
@@ -67,5 +96,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FDB240',
     padding: 5,
     borderRadius: 5,
+  },
+  buttonDisable: {
+    backgroundColor: '#DDD',
   }
 });
