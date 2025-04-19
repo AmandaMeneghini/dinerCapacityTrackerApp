@@ -16,6 +16,12 @@ export default function App() {
     return setCount(count + 1);
   }
 
+  function removePerson(){
+    if(count > 1){
+      return setCount(count - 1);
+    }
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Pessoas no restaurante:</Text>
@@ -29,7 +35,7 @@ export default function App() {
           <Text style={styles.buttonText}>Adicionar</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.button, {backgroundColor: '#DDD'}]}>
+        <TouchableOpacity style={[styles.button, {backgroundColor: '#DDD'}] } onPress={removePerson}>
           <Text style={styles.buttonText}>Remover</Text>
         </TouchableOpacity>
       </View>
