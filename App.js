@@ -13,7 +13,9 @@ export default function App() {
   const [capacity, setCapacity] = useState(10);
 
   function addPerson(){
-    return setCount(count + 1);
+    if(count < capacity){
+      return setCount(count + 1);
+    }
   }
 
   function removePerson(){
