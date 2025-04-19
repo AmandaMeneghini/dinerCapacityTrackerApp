@@ -30,7 +30,9 @@ export default function App() {
 
       <Text style={styles.countDisplay}>{count}</Text>
 
-      <Text style={styles.warning}>Restaurante está no seu limite de pessoas</Text>
+      {count == capacity && 
+        <Text style={styles.warning}>Restaurante está no seu limite de pessoas</Text>
+      }
 
       <View style={styles.buttonArea}>
         <TouchableOpacity style={styles.button} onPress={addPerson}>
